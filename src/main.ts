@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { UnauthorizedInterceptor } from './common/errors/interceptors/unauthorized.interceptor';
 import { NotFoundInterceptor } from './common/errors/interceptors/not-found.interceptor';
 import { DatabaseInterceptor } from './common/errors/interceptors/database.interceptor';
+import { ConflictInterceptor } from './common/errors/interceptors/conflict.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,6 +16,7 @@ async function bootstrap() {
     }),
   );
   // app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalInterceptors(new ConflictInterceptor());
   app.useGlobalInterceptors(new DatabaseInterceptor());
   app.useGlobalInterceptors(new UnauthorizedInterceptor());
   app.useGlobalInterceptors(new NotFoundInterceptor());
