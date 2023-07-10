@@ -4,6 +4,6 @@ export const isPrismaError = (e: PrismaClientError) => {
   return (
     typeof e.code === 'string' &&
     typeof e.clientVersion === 'string' &&
-    (typeof e.meta === 'undefined' || typeof e.message === 'object')
+    (typeof e.meta === 'object' || typeof e.message === 'object')
   );
 };
